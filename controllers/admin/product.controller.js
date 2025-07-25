@@ -33,19 +33,28 @@ module.exports.index = async (req, res) => {
     let find = {
         deleted: false
     };
-    console.log(req.query.status);
+    // console.log(req.query.status);
 
     if(req.query.status){
         find.status= req.query.status;
     }
 
+    let keyword= "";
+    if(req.query.keyword){
+        keyword= req.query.keyword;
+        const regex= new RegExp(keyword, "i");
+        find.title= regex;
+    }
+
+
     const products = await Product.find(find);
-    console.log(products);
-    console.log(filterStatus);
+    // console.log(products);
+    // console.log(filterStatus);
     
     res.render("admin/pages/products/index", {
         pageTitle : "Danh sách sản phẩm",
         products : products,
-        filterStatus: filterStatus
+        filterStatus: filterStatus,
+        keyword: keyword
     });
 }

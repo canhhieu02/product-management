@@ -5,12 +5,29 @@ block main
 
     .card.mb-3 
         .card-header Bộ lọc và Tìm kiếm
-        .card-body
-            each item in filterStatus
-                button(
-                    class=`btn btn-sm ml-1 btn-outline-success ${item.class}`
-                    button-status = item.status
-                ) #{item.name}
+        .row
+            .col-6
+                .card-body
+                    each item in filterStatus
+                        button(
+                            class=`btn btn-sm ml-1 btn-outline-success ${item.class}`
+                            button-status = item.status
+                        ) #{item.name}
+            .col-6.d-flex.justify-content-center.align-items-center
+                form(id="form-search")
+                    .input-group
+                        input(
+                            type= "text"
+                            placehoder= "Nhập từ khóa"
+                            name= "keyword"
+                            class="form-control"
+                            value= keyword 
+                        )
+                        .input-group-append 
+                            button(
+                                type="submit"
+                                class= "btn btn-success"
+                            ) Tìm
 
 
     .card.mb-3 
