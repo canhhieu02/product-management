@@ -1,6 +1,7 @@
 extends ../../layouts/default.pug
 include ../../mixins/filter-status.pug
 include ../../mixins/search.pug
+include ../../mixins/pagination.pug
 
 block main
     h1 Danh sách sản phẩm
@@ -12,9 +13,7 @@ block main
                 .col-6
                     +filter-status(filterStatus)
                 .col-6
-                    +search 
-
-                
+                    +search(keyword)
 
     .card.mb-3 
         .card-header Danh sách
@@ -51,19 +50,4 @@ block main
                                 button(class= "btn btn-warning btn-sm") Sửa
                                 button(class= "btn btn-danger btn-sm ml-1") Xóa
 
-            //- tr 
-            //-     td 2
-            //-     td
-            //-         img(
-            //-             src="https://cdn.dummyjson.com/product-images/beauty/eyeshadow-palette-with-mirror/thumbnail.webp"
-            //-             alt="sản phẩm 2"
-            //-             width="50px"
-            //-             hight="auto"
-            //-         )
-            //-     td Sản phẩm 2
-            //-     td 150$
-            //-     td 
-            //-         a(href="#" class="badge badge-danger") Dừng hoạt động
-            //-     td 
-            //-         button(class= "btn btn-warning btn-sm") Sửa
-            //-         button(class= "btn btn-danger btn-sm ml-1") Xóa
+    +pagination(pagination)
