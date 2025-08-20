@@ -6,7 +6,6 @@ const paginationHelper = require("../../helpers/pagination");
 
 module.exports.index = async (req, res) => {
 
-
     const filterStatus= filterStatusHelper(req.query); // Bộ lọc trạng thái
 
     let find = {
@@ -78,6 +77,17 @@ module.exports.changeMulti = async(req, res) => {
             break;
     }
 
+    const referer = req.get('Referer') || '/admin/products';
+    
+    res.redirect(referer);
+}
+
+// [PACTH] /admin/products/delete/:id
+module.exports.deleteItem = async(req, res) => {
+    const id= req.params.id;
+
+    await Product.deleteOne({ _id: id });
+   
     const referer = req.get('Referer') || '/admin/products';
     
     res.redirect(referer);
