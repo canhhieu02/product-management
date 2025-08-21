@@ -93,6 +93,14 @@ if(formChangeMulti){
         e.preventDefault();
         const checkboxMulti = document.querySelector("[checkbox-multi]");
         const inputsChecked = checkboxMulti.querySelectorAll("input[name='id']:checked");
+        const typeChange = e.target.elements.type.value;
+
+        if(typeChange == "delete-all" && inputsChecked.length > 0){
+            const isConfirm = confirm("Bạn có chắc chắn muốn xóa sản phẩm này?")
+            if(!isConfirm){
+                return;
+            }
+        }
 
         if(inputsChecked.length > 0){
             let ids = [];
@@ -109,7 +117,7 @@ if(formChangeMulti){
         }else{
             alert("vui lòng chọn ít nhất một bản ghi");
         }
-    })
+    });
 }
 
 // End Form change multi
