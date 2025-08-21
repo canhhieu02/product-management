@@ -6,4 +6,6 @@ router.get("/", controller.index);
 
 router.patch("/redelete/:id", controller.reDeleteItem);
 
+router.delete("/delete/:id", controller.deleteItem);
+
 module.exports = router;

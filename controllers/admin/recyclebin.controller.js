@@ -48,7 +48,7 @@ module.exports.index = async (req, res) => {
     });
 }
 
-// [PACTH] /admin/redelete/:id
+// [PACTH] /admin/recyclebin/redelete/:id
 module.exports.reDeleteItem = async(req, res) => {
     const id= req.params.id;
 
@@ -57,6 +57,17 @@ module.exports.reDeleteItem = async(req, res) => {
         deletedAt: new Date()
     });
   
+    const referer = req.get('Referer') || '/admin/products';
+    
+    res.redirect(referer);
+}
+
+// [PACTH] /admin/recyclebin/delete/:id
+module.exports.deleteItem = async(req, res) => {
+    const id= req.params.id;
+
+    await Product.deleteOne({ _id: id });
+    
     const referer = req.get('Referer') || '/admin/products';
     
     res.redirect(referer);
