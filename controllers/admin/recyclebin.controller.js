@@ -56,6 +56,8 @@ module.exports.reDeleteItem = async(req, res) => {
         deleted: false,
         deletedAt: new Date()
     });
+
+    req.flash('success', 'Khôi phục sản phẩm thành công!');  
   
     const referer = req.get('Referer') || '/admin/products';
     
@@ -67,6 +69,8 @@ module.exports.deleteItem = async(req, res) => {
     const id= req.params.id;
 
     await Product.deleteOne({ _id: id });
+
+     req.flash('success', 'Xóa vĩnh viễn sản phẩm thành công!');  
     
     const referer = req.get('Referer') || '/admin/products';
     
