@@ -1,0 +1,43 @@
+extends ../../layouts/default.pug
+
+block main
+    .container.my-3
+        .row
+            .col-12
+                .product-detail-container
+                    .product-card
+                        if (product.thumbnail)
+                            .product-image
+                                img(src=product.thumbnail alt=product.title)
+
+                        .product-info
+                            if (product.title)
+                                h1.product-title #{product.title}
+
+                            if (product.price)
+                                p.product-price Giá: 
+                                    span #{product.price} $
+
+                            if (product.discountPercentage)
+                                p.product-discount Giảm giá: 
+                                    span #{product.discountPercentage} %
+
+                            if (product.stock)
+                                p.product-stock Còn lại: 
+                                    span #{product.stock}
+
+                            if (product.position)
+                                p.product-position Vị trí: 
+                                    span #{product.position}
+
+                            if (product.description)
+                                .product-description
+                                    h3 Mô tả sản phẩm
+                                    div!= product.description
+
+                            // nhóm button
+                            .action-buttons
+                                a(
+                                    href=`/products`
+                                    class="btn-back"
+                                ) ⬅ Quay lại
