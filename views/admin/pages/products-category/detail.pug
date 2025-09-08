@@ -1,0 +1,39 @@
+extends ../../layouts/default.pug
+
+block main
+  .product-detail-container
+    .product-card
+      if (records.thumbnail)
+        .product-image
+          img(src=records.thumbnail alt=records.title)
+
+      .product-info
+        if (records.title)
+          h1.product-title #{records.title}
+
+        if (records.status)
+          p.product-status Trạng thái: 
+            if (records.status === "active")
+              span.status-badge.active Hoạt động
+            else
+              span.status-badge.inactive Dừng hoạt động
+
+        if (records.position)
+          p.product-position Vị trí: 
+            span #{records.position}
+
+        if (records.description)
+          .product-description
+            h3 Mô tả sản phẩm
+            div!= records.description
+
+        // nhóm button
+        .action-buttons
+          a(
+            href=`${prefixAdmin}/products-category`
+            class="btn-back"
+          ) ⬅ Quay lại
+          a(
+            href=`${prefixAdmin}/products-category/edit/${records.id}`
+            class="btn-edit"
+          ) ✏️ Chỉnh sửa
