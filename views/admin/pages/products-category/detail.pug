@@ -10,7 +10,9 @@ block main
       .product-info
         if (records.title)
           h1.product-title #{records.title}
-
+        if (parentTitle)
+          p.product-position Danh mục cha: 
+            span #{parentTitle}
         if (records.status)
           p.product-status Trạng thái: 
             if (records.status === "active")

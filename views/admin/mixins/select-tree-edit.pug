@@ -1,0 +1,11 @@
+mixin select-tree-edit(records, items, level = 1)
+  each item in items
+    - const prefix = Array(level+1).join("-- ");
+      if(records.parent_id == item.id)
+        option(value=records.parent_id selected disabled) #{prefix} #{item.title}
+      if(records.parent_id == "" && records.title == item.title)
+        option(value=records.parent_id disabled) #{prefix} #{item.title}
+      else 
+        option(value=item.id) #{prefix} #{item.title}
+    if (item.children && item.children.length > 0)
+      +select-tree-edit(records, item.children, level + 1)

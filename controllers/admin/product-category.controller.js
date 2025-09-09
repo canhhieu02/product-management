@@ -103,13 +103,20 @@ module.exports.detail = async (req, res) => {
 
         const records = await ProductCategory.findOne(find);
 
+        let parentTitle = records;
+        if(records.parent_id){
+            parentTitle = await ProductCategory.findById(records.parent_id);
+            console.log(parentTitle.title);
+        }
+
         res.render("admin/pages/products-category/detail", {
             pageTitle : records.title,
-            records: records
+            records: records,
+            parentTitle: parentTitle.title
         });
     } catch (error) {
         req.flash('error', 'Không có sản phẩm này!');
-        res.redirect(`${systemConfig.prefixAdmin}/products`);
+        res.redirect(`${systemConfig.prefixAdmin}/products-category`);
     }
 }
 
@@ -120,14 +127,16 @@ module.exports.edit = async (req, res) => {
 
         let find = {
             deleted: false,
+            _id: req.params.id
         };
-        
-        const recordsParent = await ProductCategory.find(find);
-        const newRecord = createTreeHelper.Tree(recordsParent);
-
-        find._id = req.params.id;
 
         records = await ProductCategory.findOne(find);
+        
+        const recordsParent = await ProductCategory.find({
+            deleted: false
+        });
+        const newRecord = createTreeHelper.Tree(recordsParent);
+      
 
         res.render("admin/pages/products-category/edit", {
             pageTitle : "Chỉnh sửa danh mục sản phẩm",

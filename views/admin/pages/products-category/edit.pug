@@ -30,8 +30,8 @@ block main
                 id="parent_id"
                 name="parent_id"
             )
-                option(value=records.id selected disabled) #{records.title}
-                + select-tree(newRecord)
+                option(value="") - Chọn danh mục cha -
+                + select-tree(newRecord, 1, records.parent_id)
         div(class="form-group")
             label(for="desc") Mô tả
             textarea(
