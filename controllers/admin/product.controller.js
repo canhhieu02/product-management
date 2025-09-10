@@ -186,7 +186,7 @@ module.exports.createPost = async(req, res) => {
         req.flash('success', 'Thêm mới sản phẩm thành công!');
 
     } catch (error) {
-        req.flash('success', 'Thêm mới sản phẩm thất bại!');
+        req.flash('error', 'Thêm mới sản phẩm thất bại!');
     }
 
     res.redirect(`${systemConfig.prefixAdmin}/products`);
